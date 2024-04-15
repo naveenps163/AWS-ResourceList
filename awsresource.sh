@@ -1,4 +1,4 @@
-  #!/bin/bash
+#!/bin/bash
 
 # Check if AWS region is provided as a command-line argument
 if [ -z "$1" ]; then
@@ -88,4 +88,54 @@ aws autoscaling describe-auto-scaling-groups --region $AWS_REGION --query 'AutoS
 # List ACM certificates
 echo "ACM Certificates:"
 aws acm list-certificates --region $AWS_REGION --query 'CertificateSummaryList[*].[DomainName, CertificateArn]'
+
+# List NAT gateways
+echo "NAT Gateways:"
+aws ec2 describe-nat-gateways --region $AWS_REGION --query 'NatGateways[*].[NatGatewayId, State]'
+
+# List Amazon ECR repositories
+echo "Amazon ECR Repositories:"
+aws ecr describe-repositories --region $AWS_REGION --query 'repositories[*].[repositoryName, repositoryUri]'
+
+# List Amazon CloudFront distributions
+echo "CloudFront Distributions:"
+aws cloudfront list-distributions --region $AWS_REGION --query 'DistributionList.Items[*].[Id, DomainName]'
+
+# List AWS Global Accelerator accelerators
+echo "AWS Global Accelerator Accelerators:"
+aws globalaccelerator list-accelerators --region $AWS_REGION --query 'Accelerators[*].[AcceleratorArn, IpSets]'
+
+# List AWS Control Tower managed accounts
+echo "AWS Control Tower Managed Accounts:"
+aws controltower describe-managed-accounts --region $AWS_REGION --query 'ManagedAccounts[*].[AccountName, AccountId]'
+
+# List Amazon Managed Grafana workspaces
+echo "Amazon Managed Grafana Workspaces:"
+aws managedgrafana list-workspaces --region $AWS_REGION --query 'workspaces[*].[workspaceId, workspaceName]'
+
+# List Amazon Managed Prometheus workspaces
+echo "Amazon Managed Prometheus Workspaces:"
+aws managedprometheus list-workspaces --region $AWS_REGION --query 'workspaces[*].[workspaceId, workspaceName]'
+
+# List AWS AppSync APIs
+echo "AWS AppSync APIs:"
+aws appsync list-graphql-apis --region $AWS_REGION --query 'graphqlApis[*].[apiId, apiName]'
+
+# List AWS Amplify apps
+echo "AWS Amplify Apps:"
+aws amplify list-apps --region $AWS_REGION --query 'apps[*].[appId, name]'
+
+# List AWS Key Management Service (KMS) keys
+echo "AWS KMS Keys:"
+aws kms list-keys --region $AWS_REGION --query 'Keys[*].[KeyId, KeyArn]'
+
+# List AWS Secrets Manager secrets
+echo "AWS Secrets Manager Secrets:"
+aws secretsmanager list-secrets --region $AWS_REGION --query 'SecretList[*].[Name, ARN]'
+
+# List AWS WAF web ACLs
+echo "AWS WAF Web ACLs:"
+aws wafv2 list-web-acls --region $AWS_REGION --query 'WebACLs[*].[Name, ARN]'
+
+
 
